@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class UserEstablishmentRole extends BaseEntity {
+public class UserEstablishment extends BaseEntity {
 
     @EmbeddedId
     private UserEstablishmentId id;

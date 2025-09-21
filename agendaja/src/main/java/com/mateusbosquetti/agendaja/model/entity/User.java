@@ -16,13 +16,13 @@ public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
-    @Column(nullable = true, unique = true, length = 11)
+    @Column(unique = true, length = 11)
     private String cpf;
-    @Column(nullable = true, unique = true, length = 11)
+    @Column(unique = true, length = 11)
     private String phone;
 
     @OneToOne(mappedBy = "user")
