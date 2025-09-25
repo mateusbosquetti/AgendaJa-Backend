@@ -1,7 +1,13 @@
 package com.mateusbosquetti.agendaja.model.entity;
 
+import com.mateusbosquetti.agendaja.model.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Builder
 @Entity(name = "users_authentication")
@@ -9,9 +15,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-//TODO: Add interface contract to implement others attributes and methods
-//https://docs.google.com/document/d/1h8p_Tuf534-qPC_OsS2Kk8ThFmNw-uCTvIJUro9BqSc/edit?tab=t.0
-public class UserAuthentication extends BaseEntity {
+public class UserAuthentication extends BaseEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +30,27 @@ public class UserAuthentication extends BaseEntity {
     @OneToOne()
     @JoinColumn(name = "user_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_user_authentication_user"))
     private User user;
+
+    @Column(nullable = false)
+    private boolean accountNonExpired;
+    @Column(nullable = false)
+    private boolean accountNonLocked;
+    @Column(nullable = false)
+    private boolean credentialsNonExpired;
+    @Column(nullable = false)
+    private boolean enabled;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getEmail();
+    }
 
 }
