@@ -5,12 +5,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Embeddable
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class UserEstablishmentId implements Serializable {
 
     @Column(name = "establishment_id")

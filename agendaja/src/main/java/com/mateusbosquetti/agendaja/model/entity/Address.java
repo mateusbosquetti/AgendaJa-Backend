@@ -19,7 +19,7 @@ public class Address extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String postalCode;
+    private Long number;
     @Column(nullable = false)
     private String street;
     @Column(nullable = false)
@@ -28,6 +28,8 @@ public class Address extends BaseEntity {
     private String stateProvince;
     @Column(nullable = false, length = 2)
     private String countryCode;
+    @Column(nullable = false)
+    private String postalCode;
     @Column(precision = 9, scale = 6)
     private BigDecimal latitude;
     @Column(precision = 9, scale = 6)
