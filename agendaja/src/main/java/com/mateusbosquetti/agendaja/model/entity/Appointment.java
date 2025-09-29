@@ -3,7 +3,6 @@ package com.mateusbosquetti.agendaja.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Builder
@@ -29,7 +28,7 @@ public class Appointment extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "service_id", nullable = false, foreignKey = @ForeignKey(name = "fk_appointment_service"))
-    private Service service;
+    private ServiceEntity serviceEntity;
 
     @Column(nullable = false)
     private LocalDateTime time;

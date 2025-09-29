@@ -28,6 +28,6 @@ public class Establishment extends BaseEntity {
     private Address address;
 
     @OneToMany(mappedBy = "establishment", orphanRemoval = true)
-    private List<Service> services;
+    private List<ServiceEntity> serviceEntities;
 
 }

@@ -1,26 +1,26 @@
 package com.mateusbosquetti.agendaja.mapper;
 
 import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
-import com.mateusbosquetti.agendaja.model.entity.Service;
+import com.mateusbosquetti.agendaja.model.entity.ServiceEntity;
 
 public class ServiceMapper {
 
-    public static Service toEntity(
+    public static ServiceEntity toEntity(
             //DTO
     ) {
-        return Service.builder().build();
+        return ServiceEntity.builder().build();
     }
 
     public static ServiceResponseDTO toDTO(
-            Service service
+            ServiceEntity serviceEntity
     ) {
         return new ServiceResponseDTO(
-                service.getId(),
-                service.getName(),
-                service.getDescription(),
-                service.getDurationMinutes(),
-                service.getPrice(),
-                service.getEstablishment().getId()
+                serviceEntity.getId(),
+                serviceEntity.getName(),
+                serviceEntity.getDescription(),
+                serviceEntity.getDurationMinutes(),
+                serviceEntity.getPrice(),
+                serviceEntity.getEstablishment().getId()
         );
     }
 

@@ -29,12 +29,14 @@ public class User extends BaseEntity {
     private UserAuthentication userAuthentication;
 
     @OneToOne()
-    @JoinColumn(name = "address_id", nullable = true, unique = true, foreignKey = @ForeignKey(name = "fk_user_address"))
+    @JoinColumn(name = "address_id", unique = true, foreignKey = @ForeignKey(name = "fk_user_address"))
     private Address address;
 
     @OneToMany(mappedBy = "client")
     private List<Appointment> appointmentsAsClient;
     @OneToMany(mappedBy = "professional")
     private List<Appointment> appointmentsAsProfessional;
+    @OneToMany(mappedBy = "professional", orphanRemoval = true)
+    private List<ServiceProfessional> servicesAsProfessional;
 
 }

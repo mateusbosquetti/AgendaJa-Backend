@@ -4,6 +4,7 @@ import com.mateusbosquetti.agendaja.mapper.ServiceMapper;
 import com.mateusbosquetti.agendaja.model.dto.request.ServiceRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
+import com.mateusbosquetti.agendaja.model.entity.ServiceEntity;
 import com.mateusbosquetti.agendaja.repository.ServiceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class ServiceService {
     private final ServiceRepository repository;
 
     public ServiceResponseDTO createService(ServiceRequestDTO requestDTO) {
-        com.mateusbosquetti.agendaja.model.entity.Service service = com.mateusbosquetti.agendaja.model.entity.Service.builder()
+        ServiceEntity serviceEntity = ServiceEntity.builder()
                 .name(requestDTO.name())
                 .description(requestDTO.description())
                 .durationMinutes(requestDTO.durationMinutes())
@@ -27,9 +28,9 @@ public class ServiceService {
                 )
                 .build();
 
-        service = repository.save(service);
+        serviceEntity = repository.save(serviceEntity);
 
-        return ServiceMapper.toDTO(service);
+        return ServiceMapper.toDTO(serviceEntity);
     }
 
     public ServiceResponseDTO getServiceById(Long id) {

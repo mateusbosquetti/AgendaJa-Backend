@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Builder
 @Entity(name = "services")
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class Service extends BaseEntity {
+public class ServiceEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +32,8 @@ public class Service extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "establishment_id", nullable = false, foreignKey = @ForeignKey(name = "fk_service_establishment"))
     private Establishment establishment;
+
+    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServiceProfessional> serviceProfessionals;
 
 }

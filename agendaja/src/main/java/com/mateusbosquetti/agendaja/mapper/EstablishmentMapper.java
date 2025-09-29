@@ -15,7 +15,7 @@ public class EstablishmentMapper {
                 .name(requestDTO.name())
                 .cnpj(requestDTO.cnpj())
                 .address(AddressMapper.toEntity(requestDTO.address()))
-                .services(List.of())
+                .serviceEntities(List.of())
                 .build();
     }
 
@@ -27,7 +27,7 @@ public class EstablishmentMapper {
                 establishment.getName(),
                 establishment.getCnpj(),
                 establishment.getAddress(),
-                establishment.getServices().stream()
+                establishment.getServiceEntities().stream()
                         .map(ServiceMapper::toDTO)
                         .toList()
         );
