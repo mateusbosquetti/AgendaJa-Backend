@@ -41,7 +41,7 @@ public class AppointmentService {
     public List<AppointmentResponseDTO> getAppointmentsByEstablishment(Long establishmentId) {
         List<ServiceResponseDTO> services = serviceService.getServicesByEstablishment(establishmentId);
 
-        return repository.findAppointmentsByService_IdIn(services.stream().map(ServiceResponseDTO::id).toList())
+        return repository.findAppointmentsByServiceEntity_IdIn(services.stream().map(ServiceResponseDTO::id).toList())
                 .stream().map(
                         AppointmentMapper::toDTO
                 ).toList();

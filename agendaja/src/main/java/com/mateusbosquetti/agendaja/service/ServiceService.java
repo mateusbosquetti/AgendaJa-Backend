@@ -7,6 +7,9 @@ import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.model.entity.ServiceEntity;
 import com.mateusbosquetti.agendaja.repository.ServiceRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.List;
 public class ServiceService {
 
     private final ServiceRepository repository;
+    private final ServiceProfessionalService serviceProfessionalService;
 
     public ServiceResponseDTO createService(ServiceRequestDTO requestDTO) {
         ServiceEntity serviceEntity = ServiceEntity.builder()
@@ -39,12 +43,19 @@ public class ServiceService {
                 .orElseThrow(() -> new RuntimeException("Service not found"));
     }
 
-    public List<ServiceResponseDTO> getServices() {
-        return repository.findAll().stream().map(ServiceMapper::toDTO).toList();
+    public Page<ServiceResponseDTO> getServices(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findAll(pageable).map(ServiceMapper::toDTO);
     }
 
     public List<ServiceResponseDTO> getServicesByEstablishment(Long establishmentId) {
         return repository.findServicesByEstablishment_Id(establishmentId).stream().map(
+                ServiceMapper::toDTO
+        ).toList();
+    }
+
+    public List<ServiceResponseDTO> getServicesByProfessional(Long professionalId) {
+        return this.serviceProfessionalService.getServicesByProfessional(professionalId).stream().map(
                 ServiceMapper::toDTO
         ).toList();
     }

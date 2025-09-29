@@ -18,7 +18,7 @@ public class ServiceProfessional extends BaseEntity {
     @ManyToOne
     @MapsId("serviceId")
     @JoinColumn(name = "service_id", nullable = false, foreignKey = @ForeignKey(name = "fk_service_professional_service"))
-    private ServiceEntity serviceEntity;
+    private ServiceEntity service;
 
     @ManyToOne
     @MapsId("professionalId")

@@ -34,6 +34,6 @@ public class ServiceEntity extends BaseEntity {
     private Establishment establishment;
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ServiceProfessional> serviceProfessionals;
+    private List<ServiceProfessional> professionals;
 
 }

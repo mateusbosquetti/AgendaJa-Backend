@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ServiceRepository extends JpaRepository<ServiceEntity, Long> {
     List<ServiceEntity> findServicesByEstablishment_Id(Long establishmentId);
+
 }

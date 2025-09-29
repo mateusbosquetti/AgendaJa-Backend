@@ -1,0 +1,1 @@
+Implemtar filtros e sorters nos endpoints GETs https://www.youtube.com/watch?v=I2ZBxcFQw5I

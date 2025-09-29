@@ -4,6 +4,7 @@ import com.mateusbosquetti.agendaja.model.dto.request.ServiceRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.service.ServiceService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +18,12 @@ public class ServiceController {
 
     private final ServiceService service;
 
-    //TODO: Pagination
     @GetMapping
-    public ResponseEntity<List<ServiceResponseDTO>> getServices(
+    public ResponseEntity<Page<ServiceResponseDTO>> getServices(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size
     ) {
-        return new ResponseEntity<>(service.getServices(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getServices(page, size), HttpStatus.OK);
     }
 
     @GetMapping("/establishment/{establishmentId}")
@@ -36,6 +38,13 @@ public class ServiceController {
             @PathVariable Long id
     ) {
         return new ResponseEntity<>(service.getServiceById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/professional/{professionalId}")
+    public ResponseEntity<List<ServiceResponseDTO>> getServicesByProfessional(
+            @PathVariable Long professionalId
+    ) {
+        return new ResponseEntity<>(service.getServicesByProfessional(professionalId), HttpStatus.OK);
     }
 
     @PostMapping()

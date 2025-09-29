@@ -8,6 +8,9 @@ import com.mateusbosquetti.agendaja.model.entity.User;
 import com.mateusbosquetti.agendaja.model.enums.FunctionRole;
 import com.mateusbosquetti.agendaja.repository.EstablishmentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,5 +39,10 @@ public class EstablishmentService {
                 FunctionRole.OWNER
         );
         return EstablishmentMapper.toDTO(establishment);
+    }
+
+    public Page<EstablishmentResponseDTO> getEstablishments(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findAll(pageable).map(EstablishmentMapper::toDTO);
     }
 }
