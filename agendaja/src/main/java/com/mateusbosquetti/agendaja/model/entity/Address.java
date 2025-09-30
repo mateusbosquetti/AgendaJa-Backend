@@ -2,6 +2,8 @@ package com.mateusbosquetti.agendaja.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 
@@ -11,6 +13,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@SQLDelete(sql = "UPDATE address SET disabled = true WHERE id = ?")
+@Where(clause = "disabled = false")
 public class Address extends BaseEntity {
 
     @Id

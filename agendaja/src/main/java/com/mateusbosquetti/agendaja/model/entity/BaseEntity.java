@@ -20,4 +20,7 @@ public class BaseEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Column(name = "disabled", nullable = false)
+    private Boolean disabled = false;
+
 }

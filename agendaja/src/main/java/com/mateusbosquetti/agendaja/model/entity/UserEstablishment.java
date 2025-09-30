@@ -3,6 +3,8 @@ package com.mateusbosquetti.agendaja.model.entity;
 import com.mateusbosquetti.agendaja.model.compositekey.UserEstablishmentId;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Builder
 @Entity(name = "user_establishment_roles")
@@ -10,6 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@SQLDelete(sql = "UPDATE user_establishment_roles SET disabled = true WHERE user_id = ? AND establishment_id = ?")
+@Where(clause = "disabled = false")
 public class UserEstablishment extends BaseEntity {
 
     @EmbeddedId

@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class EstablishmentCategory extends BaseEntity {
+public class EstablishmentCategory {
 
     @EmbeddedId
     private EstablishmentCategoryId id;

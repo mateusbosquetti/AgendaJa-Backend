@@ -3,6 +3,8 @@ package com.mateusbosquetti.agendaja.model.entity;
 import com.mateusbosquetti.agendaja.model.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,6 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@SQLDelete(sql = "UPDATE users_authentication SET disabled = true WHERE id = ?")
+@Where(clause = "disabled = false")
 public class UserAuthentication extends BaseEntity implements UserDetails {
 
     @Id
@@ -37,8 +41,6 @@ public class UserAuthentication extends BaseEntity implements UserDetails {
     private boolean accountNonLocked;
     @Column(nullable = false)
     private boolean credentialsNonExpired;
-    @Column(nullable = false)
-    private boolean enabled;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -52,5 +54,11 @@ public class UserAuthentication extends BaseEntity implements UserDetails {
     public String getUsername() {
         return this.getEmail();
     }
+
+    @Override
+    public boolean isEnabled() {
+        return !this.getDisabled();
+    }
+
 
 }

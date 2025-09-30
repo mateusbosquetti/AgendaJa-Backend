@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class ServiceProfessional extends BaseEntity {
+public class ServiceProfessional {
 
     @EmbeddedId
     private ServiceProfessionalId id;
