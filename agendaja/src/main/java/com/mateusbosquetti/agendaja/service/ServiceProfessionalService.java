@@ -17,7 +17,7 @@ public class ServiceProfessionalService {
 
     private final ServiceProfessionalRepository repository;
 
-    public ServiceProfessionalResponseDTO createServiceProfessional(ServiceProfessionalRequestDTO requestDTO) {
+    public ServiceProfessionalResponseDTO associateProfessionalToService(ServiceProfessionalRequestDTO requestDTO) {
         ServiceProfessional serviceProfessional = ServiceProfessionalMapper.toEntity(requestDTO);
         serviceProfessional = repository.save(serviceProfessional);
         return ServiceProfessionalMapper.toDTO(serviceProfessional);

@@ -11,6 +11,8 @@ import com.mateusbosquetti.agendaja.repository.UserEstablishmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UserEstablishmentService {
@@ -33,6 +35,14 @@ public class UserEstablishmentService {
         userEstablishment = repository.save(userEstablishment);
 
         return UserEstablishmentMapper.toDTO(userEstablishment);
+    }
+
+    public List<UserEstablishment> getEstablishmentUsersByEstablishmentIdAndFunction(Long establishmentId, FunctionRole functionRole) {
+        return repository.findUserEstablishmentById_EstablishmentIdAndId_FunctionRole(establishmentId, functionRole);
+    }
+
+    public List<UserEstablishment> getUserEstablishmentsByUserId(Long userId) {
+        return repository.findAllById_UserId(userId);
     }
 
 }

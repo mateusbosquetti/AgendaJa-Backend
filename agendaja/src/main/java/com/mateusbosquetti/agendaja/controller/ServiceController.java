@@ -1,6 +1,8 @@
 package com.mateusbosquetti.agendaja.controller;
 
+import com.mateusbosquetti.agendaja.model.dto.request.ServiceProfessionalRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.ServiceRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.ServiceProfessionalResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.service.ServiceService;
 import lombok.AllArgsConstructor;
@@ -52,6 +54,21 @@ public class ServiceController {
             @RequestBody ServiceRequestDTO requestDTO
     ) {
         return new ResponseEntity<>(service.createService(requestDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/associate-professional")
+    public ResponseEntity<ServiceProfessionalResponseDTO> associateProfessionalToService(
+            @RequestBody ServiceProfessionalRequestDTO requestDTO
+    ) {
+        return new ResponseEntity<>(service.associateProfessionalToService(requestDTO), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> disableService(
+            @PathVariable Long id
+    ) {
+        service.disableService(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

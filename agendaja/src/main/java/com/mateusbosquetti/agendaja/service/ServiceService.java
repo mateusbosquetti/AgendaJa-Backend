@@ -1,7 +1,9 @@
 package com.mateusbosquetti.agendaja.service;
 
 import com.mateusbosquetti.agendaja.mapper.ServiceMapper;
+import com.mateusbosquetti.agendaja.model.dto.request.ServiceProfessionalRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.ServiceRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.ServiceProfessionalResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.model.entity.ServiceEntity;
@@ -58,5 +60,13 @@ public class ServiceService {
         return this.serviceProfessionalService.getServicesByProfessional(professionalId).stream().map(
                 ServiceMapper::toDTO
         ).toList();
+    }
+
+    public void disableService(Long serviceId) {
+        repository.deleteById(serviceId);
+    }
+
+    public ServiceProfessionalResponseDTO associateProfessionalToService(ServiceProfessionalRequestDTO requestDTO) {
+        return this.serviceProfessionalService.associateProfessionalToService(requestDTO);
     }
 }
