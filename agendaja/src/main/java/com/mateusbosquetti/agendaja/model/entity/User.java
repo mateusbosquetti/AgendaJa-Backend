@@ -32,15 +32,15 @@ public class User extends BaseEntity {
     @OneToOne(mappedBy = "user")
     private UserAuthentication userAuthentication;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "address_id", unique = true, foreignKey = @ForeignKey(name = "fk_user_address"))
     private Address address;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Appointment> appointmentsAsClient;
-    @OneToMany(mappedBy = "professional")
+    @OneToMany(mappedBy = "professional", fetch = FetchType.LAZY)
     private List<Appointment> appointmentsAsProfessional;
-    @OneToMany(mappedBy = "professional", orphanRemoval = true)
+    @OneToMany(mappedBy = "professional", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ServiceProfessional> servicesAsProfessional;
 
 }

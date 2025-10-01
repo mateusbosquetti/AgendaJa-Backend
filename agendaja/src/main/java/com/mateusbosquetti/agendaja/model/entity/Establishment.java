@@ -27,11 +27,11 @@ public class Establishment extends BaseEntity {
     @Column(nullable = false, unique = true, length = 14)
     private String cnpj;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "address_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_user_address"))
     private Address address;
 
-    @OneToMany(mappedBy = "establishment", orphanRemoval = true)
+    @OneToMany(mappedBy = "establishment", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ServiceEntity> serviceEntities;
 
 }

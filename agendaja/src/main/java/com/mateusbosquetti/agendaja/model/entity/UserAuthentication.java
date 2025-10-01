@@ -31,7 +31,7 @@ public class UserAuthentication extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne()
+    @OneToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_user_authentication_user"))
     private User user;
 

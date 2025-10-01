@@ -15,12 +15,12 @@ public class EstablishmentCategory {
     @EmbeddedId
     private EstablishmentCategoryId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("establishmentId")
     @JoinColumn(name = "establishment_id", nullable = false, foreignKey = @ForeignKey(name = "fk_establishment_category_establishment"))
     private Establishment establishment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("categoryId")
     @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_establishment_category_category"))
     private Category category;
