@@ -4,3 +4,5 @@ Resolver problema N+1
 
 Entidades exclusivas para relacionamento nao ter controller
 Endpoints devem ser feito do lado mandante do contexto
+
+Configuracoes do banco, default e etc
