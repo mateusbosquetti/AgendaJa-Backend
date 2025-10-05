@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41df335e-1a3c-4b5e-81be-11038992f8c7" name="Changes" comment="fix: comment out dependency graph update step in Maven workflow">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agendaja/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/agendaja/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +57,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.AgendaJaApplication.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Mateus Bosquetti/Documents/AgendaJá/AgendaJa-Backend",
     "node.js.detected.package.eslint": "true",
@@ -66,7 +69,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Docker.Dockerfile builder">
+  <component name="RunManager" selected="Spring Boot.AgendaJaApplication">
     <configuration name="AgendaJaApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="agendaja" />
       <extension name="coverage">
@@ -150,7 +153,7 @@
       <workItem from="1759446889023" duration="318000" />
       <workItem from="1759447245476" duration="2158000" />
       <workItem from="1759622714078" duration="742000" />
-      <workItem from="1759623729364" duration="1690000" />
+      <workItem from="1759623729364" duration="1993000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add Copilot custom instructions for project standards and best practices">
       <option name="closed" value="true" />
