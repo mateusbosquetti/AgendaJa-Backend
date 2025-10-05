@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres_container
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  agendaja:
+    build: .
+    container_name: agendaja_app
+    ports:
+      - "${SERVER_PORT}:8080"
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
