@@ -1,0 +1,49 @@
+package com.mateusbosquetti.agendaja.service;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.mateusbosquetti.agendaja.model.entity.UserAuthentication;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+
+@Service
+@AllArgsConstructor
+public class TokenService {
+
+    private static String password = "my-secret";
+    private static final Algorithm alg = Algorithm.HMAC256(password);
+
+    public String generateToken(UserAuthentication user) {
+        String token = JWT.create()
+                .withIssuer("AgendaJa")
+                .withSubject(user.getUsername())
+                .withExpiresAt(expireInstant())
+                .sign(alg);
+        return token;
+    }
+
+    public String validateToken(String token) {
+        try {
+
+        return JWT.require(alg)
+                .withIssuer("AgendaJa")
+                .build()
+                .verify(token)
+                .getSubject();
+        } catch (JWTVerificationException e) {
+            System.out.println("Validou errado");
+            return "";
+        }
+    }
+
+    private static Instant expireInstant() {
+        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+    }
+
+}

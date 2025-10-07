@@ -29,7 +29,7 @@ public class User extends BaseEntity {
     @Column(unique = true, length = 11)
     private String phone;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserAuthentication userAuthentication;
 
     @OneToOne

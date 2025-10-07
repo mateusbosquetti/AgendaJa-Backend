@@ -17,4 +17,8 @@ public class UserAuthenticationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return repository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
     }
+
+    public boolean existsByEmail(String email) {
+        return repository.findByEmail(email).orElse(null) != null;
+    }
 }
