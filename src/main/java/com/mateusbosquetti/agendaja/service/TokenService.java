@@ -10,14 +10,13 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
 
 @Service
 @AllArgsConstructor
 public class TokenService {
 
-    private static String password = "my-secret";
-    private static final Algorithm alg = Algorithm.HMAC256(password);
+    private static final String SECRET = System.getenv("JWT_SECRET");
+    private static final Algorithm alg = Algorithm.HMAC256(SECRET);
 
     public String generateToken(UserAuthentication user) {
         String token = JWT.create()
