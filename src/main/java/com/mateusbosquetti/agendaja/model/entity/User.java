@@ -15,6 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @SQLDelete(sql = "UPDATE users SET disabled = true WHERE id = ?")
 @Where(clause = "disabled = false")
+@ToString(exclude = {"appointmentsAsClient", "appointmentsAsProfessional", "servicesAsProfessional"})
 public class User extends BaseEntity {
 
     @Id

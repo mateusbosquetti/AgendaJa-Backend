@@ -22,7 +22,7 @@ public class AuthController {
     public ResponseEntity<String> login(
             @RequestBody LoginRequestDTO requestDTO
     ) {
-        return new ResponseEntity<>(authService.login(requestDTO), HttpStatus.OK);
+        return ResponseEntity.ok(authService.login(requestDTO));
     }
 
     @PostMapping("/register")
@@ -30,6 +30,6 @@ public class AuthController {
             @RequestBody RegisterRequestDTO requestDTO
             ) {
         authService.register(requestDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

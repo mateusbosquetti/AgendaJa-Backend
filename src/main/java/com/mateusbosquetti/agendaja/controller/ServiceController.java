@@ -32,35 +32,35 @@ public class ServiceController {
     public ResponseEntity<List<ServiceResponseDTO>> getServicesByEstablishment(
             @PathVariable Long establishmentId
     ) {
-        return new ResponseEntity<>(service.getServicesByEstablishment(establishmentId), HttpStatus.OK);
+        return ResponseEntity.ok(service.getServicesByEstablishment(establishmentId));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ServiceResponseDTO> getServiceById(
             @PathVariable Long id
     ) {
-        return new ResponseEntity<>(service.getServiceById(id), HttpStatus.OK);
+        return ResponseEntity.ok(service.getServiceById(id));
     }
 
     @GetMapping("/professional/{professionalId}")
     public ResponseEntity<List<ServiceResponseDTO>> getServicesByProfessional(
             @PathVariable Long professionalId
     ) {
-        return new ResponseEntity<>(service.getServicesByProfessional(professionalId), HttpStatus.OK);
+        return ResponseEntity.ok(service.getServicesByProfessional(professionalId));
     }
 
     @PostMapping()
     public ResponseEntity<ServiceResponseDTO> createService(
             @RequestBody ServiceRequestDTO requestDTO
     ) {
-        return new ResponseEntity<>(service.createService(requestDTO), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createService(requestDTO));
     }
 
     @PostMapping("/associate-professional")
     public ResponseEntity<ServiceProfessionalResponseDTO> associateProfessionalToService(
             @RequestBody ServiceProfessionalRequestDTO requestDTO
     ) {
-        return new ResponseEntity<>(service.associateProfessionalToService(requestDTO), HttpStatus.CREATED);
+                return ResponseEntity.status(HttpStatus.CREATED).body(service.associateProfessionalToService(requestDTO));
     }
 
     @DeleteMapping("/{id}")
@@ -68,7 +68,7 @@ public class ServiceController {
             @PathVariable Long id
     ) {
         service.disableService(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 
 }

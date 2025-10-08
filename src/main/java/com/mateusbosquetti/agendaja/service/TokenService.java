@@ -19,12 +19,11 @@ public class TokenService {
     private static final Algorithm alg = Algorithm.HMAC256(SECRET);
 
     public String generateToken(UserAuthentication user) {
-        String token = JWT.create()
+        return JWT.create()
                 .withIssuer("AgendaJa")
                 .withSubject(user.getUsername())
                 .withExpiresAt(expireInstant())
                 .sign(alg);
-        return token;
     }
 
     public String validateToken(String token) {
@@ -36,8 +35,7 @@ public class TokenService {
                 .verify(token)
                 .getSubject();
         } catch (JWTVerificationException e) {
-            System.out.println("Validou errado");
-            return "";
+            throw new RuntimeException("Invalid or expired token");
         }
     }
 

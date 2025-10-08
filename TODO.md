@@ -6,5 +6,3 @@ Entidades exclusivas para relacionamento nao ter controller
 Endpoints devem ser feito do lado mandante do contexto
 
 Configuracoes do banco, default e etc
-
-Testar JWT Register e Login

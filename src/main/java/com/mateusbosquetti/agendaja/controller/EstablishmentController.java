@@ -24,28 +24,28 @@ public class EstablishmentController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size
     ) {
-        return new ResponseEntity<>(service.getEstablishments(page, size), HttpStatus.OK);
+        return ResponseEntity.ok(service.getEstablishments(page, size));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EstablishmentResponseDTO> getEstablishmentById(
             @PathVariable Long id
     ) {
-        return new ResponseEntity<>(service.getEstablishmentById(id), HttpStatus.OK);
+        return ResponseEntity.ok(service.getEstablishmentById(id));
     }
 
     @GetMapping("/{id}/employees")
     public ResponseEntity<List<UserResponseDTO>> getEmployeesByEstablishment(
             @PathVariable Long id
     ) {
-        return new ResponseEntity<>(service.getEmployeesByEstablishment(id), HttpStatus.OK);
+        return ResponseEntity.ok(service.getEmployeesByEstablishment(id));
     }
 
     @PostMapping()
     public ResponseEntity<EstablishmentResponseDTO> createEstablishment(
             @RequestBody EstablishmentRequestDTO requestDTO
     ) {
-        return new ResponseEntity<>(service.createEstablishment(requestDTO), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createEstablishment(requestDTO));
     }
 
     @DeleteMapping("/{id}")
@@ -53,7 +53,7 @@ public class EstablishmentController {
             @PathVariable Long id
     ) {
         service.disableEstablishment(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 
 }

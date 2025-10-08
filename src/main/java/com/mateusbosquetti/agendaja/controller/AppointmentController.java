@@ -21,28 +21,28 @@ public class AppointmentController {
     public ResponseEntity<AppointmentResponseDTO> createAppointment(
             @RequestBody AppointmentRequestDTO appointmentRequestDTO
     ) {
-        return new ResponseEntity<>(service.createAppointment(appointmentRequestDTO), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createAppointment(appointmentRequestDTO));
     }
 
     @GetMapping("/user/{clientId}")
     public ResponseEntity<List<AppointmentResponseDTO>> getAppointmentsByClient(
             @PathVariable Long clientId
     ) {
-        return new ResponseEntity<>(service.getAppointmentsByClient(clientId), HttpStatus.OK);
+        return ResponseEntity.ok(service.getAppointmentsByClient(clientId));
     }
 
     @GetMapping("/establishment/{establishmentId}")
     public ResponseEntity<List<AppointmentResponseDTO>> getAppointmentsByEstablishment(
             @PathVariable Long establishmentId
     ) {
-        return new ResponseEntity<>(service.getAppointmentsByEstablishment(establishmentId), HttpStatus.OK);
+        return ResponseEntity.ok(service.getAppointmentsByEstablishment(establishmentId));
     }
 
     @GetMapping("/professional/{professionalId}")
     public ResponseEntity<List<AppointmentResponseDTO>> getAppointmentsByProfessional(
             @PathVariable Long professionalId
     ) {
-        return new ResponseEntity<>(service.getAppointmentsByProfessional(professionalId), HttpStatus.OK);
+        return ResponseEntity.ok(service.getAppointmentsByProfessional(professionalId));
     }
 
 }

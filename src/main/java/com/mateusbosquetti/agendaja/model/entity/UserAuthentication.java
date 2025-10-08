@@ -19,6 +19,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @SQLDelete(sql = "UPDATE users_authentication SET disabled = true WHERE id = ?")
 @Where(clause = "disabled = false")
+@ToString(exclude = {"password", "user"})
 public class UserAuthentication extends BaseEntity implements UserDetails {
 
     @Id
