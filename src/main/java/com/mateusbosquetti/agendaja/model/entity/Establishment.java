@@ -31,7 +31,9 @@ public class Establishment extends BaseEntity {
     @JoinColumn(name = "address_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_user_address"))
     private Address address;
 
-    @OneToMany(mappedBy = "establishment", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "establishment", orphanRemoval = true)
     private List<ServiceEntity> serviceEntities;
+    @OneToMany(mappedBy = "establishment", orphanRemoval = true)
+    private List<UserEstablishment> usersRelated;
 
 }

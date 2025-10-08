@@ -45,4 +45,13 @@ public class UserEstablishmentService {
         return repository.findAllById_UserId(userId);
     }
 
+    public UserEstablishment getUserEstablishmentByUserEmailAndEstablishmentId(String userEmail, Long establishmentId) {
+                return repository.findById_EstablishmentIdAndUser_UserAuthentication_Email(establishmentId, userEmail)
+                .orElseThrow(() -> new RuntimeException("UserEstablishment not found for establishmentId=" + establishmentId + ", userEmail=" + userEmail));
+    }
+
+    public void disableUserEstablishment(Long establishmentId, Long userId) {
+        repository.deleteById_EstablishmentIdAndId_UserId(establishmentId, userId);
+    }
+
 }

@@ -33,11 +33,11 @@ public class ServiceEntity extends BaseEntity {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "establishment_id", nullable = false, foreignKey = @ForeignKey(name = "fk_service_establishment"))
     private Establishment establishment;
 
-    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ServiceProfessional> professionals;
 
 }

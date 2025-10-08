@@ -22,15 +22,15 @@ public class Appointment extends BaseEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "client_id", nullable = false, foreignKey = @ForeignKey(name = "fk_appointment_client"))
     private User client;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "professional_id", nullable = false, foreignKey = @ForeignKey(name = "fk_appointment_professional"))
     private User professional;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "service_id", nullable = false, foreignKey = @ForeignKey(name = "fk_appointment_service"))
     private ServiceEntity serviceEntity;
 

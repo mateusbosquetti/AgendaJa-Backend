@@ -37,11 +37,14 @@ public class User extends BaseEntity {
     @JoinColumn(name = "address_id", unique = true, foreignKey = @ForeignKey(name = "fk_user_address"))
     private Address address;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client")
     private List<Appointment> appointmentsAsClient;
-    @OneToMany(mappedBy = "professional", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "professional")
     private List<Appointment> appointmentsAsProfessional;
-    @OneToMany(mappedBy = "professional", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "professional", orphanRemoval = true)
     private List<ServiceProfessional> servicesAsProfessional;
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<UserEstablishment> establishmentsRelated;
+
 
 }

@@ -15,12 +15,12 @@ public class ServiceProfessional {
     @EmbeddedId
     private ServiceProfessionalId id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @MapsId("serviceId")
     @JoinColumn(name = "service_id", nullable = false, foreignKey = @ForeignKey(name = "fk_service_professional_service"))
     private ServiceEntity service;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @MapsId("professionalId")
     @JoinColumn(name = "professional_id", nullable = false, foreignKey = @ForeignKey(name = "fk_service_professional_professional"))
     private User professional;
