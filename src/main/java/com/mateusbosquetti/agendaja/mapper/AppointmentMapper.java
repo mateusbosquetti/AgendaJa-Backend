@@ -1,6 +1,6 @@
 package com.mateusbosquetti.agendaja.mapper;
 
-import com.mateusbosquetti.agendaja.model.dto.request.AppointmentRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.appointment.AppointmentRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.AppointmentResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Appointment;
 import com.mateusbosquetti.agendaja.model.entity.ServiceEntity;

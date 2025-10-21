@@ -1,4 +1,4 @@
-package com.mateusbosquetti.agendaja.model.dto.request;
+package com.mateusbosquetti.agendaja.model.dto.request.service;
 
 import java.math.BigDecimal;
 

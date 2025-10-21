@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.List;
+
 @Builder
 @Entity(name = "categories")
 @Data
@@ -25,5 +27,8 @@ public class Category extends BaseEntity {
 
     @Column()
     private String description;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EstablishmentCategory> establishmentCategories;
 
 }

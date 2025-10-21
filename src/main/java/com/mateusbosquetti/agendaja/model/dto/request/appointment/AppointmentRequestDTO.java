@@ -1,4 +1,4 @@
-package com.mateusbosquetti.agendaja.model.dto.request;
+package com.mateusbosquetti.agendaja.model.dto.request.appointment;
 
 import java.time.LocalDateTime;
 
@@ -7,6 +7,6 @@ public record AppointmentRequestDTO(
         Long professionalId,
         Long serviceId,
         LocalDateTime time,
-        String note //Opcional
+        String note //TODO: Opcional
 ) {
 }

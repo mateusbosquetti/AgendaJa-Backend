@@ -16,7 +16,7 @@ public class UserEstablishmentMapper {
         return new UserEstablishmentResponseDTO(
                 establishment.getId().getEstablishmentId(),
                 establishment.getId().getUserId(),
-                establishment.getId().getFunctionRole()
+                establishment.getFunctionRole()
         );
     }
 

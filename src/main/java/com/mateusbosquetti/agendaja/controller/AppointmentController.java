@@ -1,6 +1,7 @@
 package com.mateusbosquetti.agendaja.controller;
 
-import com.mateusbosquetti.agendaja.model.dto.request.AppointmentRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.appointment.AppointmentPUTRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.appointment.AppointmentRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.AppointmentResponseDTO;
 import com.mateusbosquetti.agendaja.service.AppointmentService;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,13 @@ public class AppointmentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createAppointment(appointmentRequestDTO));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AppointmentResponseDTO> getAppointmentById(
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(service.getAppointmentById(id));
+    }
+
     @GetMapping("/user/{clientId}")
     public ResponseEntity<List<AppointmentResponseDTO>> getAppointmentsByClient(
             @PathVariable Long clientId
@@ -43,6 +51,22 @@ public class AppointmentController {
             @PathVariable Long professionalId
     ) {
         return ResponseEntity.ok(service.getAppointmentsByProfessional(professionalId));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AppointmentResponseDTO> updateAppointment(
+            @PathVariable Long id,
+            @RequestBody AppointmentPUTRequestDTO requestDTO
+    ) {
+        return ResponseEntity.ok(service.updateAppointment(id, requestDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> disableAppointment(
+            @PathVariable Long id
+    ) {
+        service.disableAppointment(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

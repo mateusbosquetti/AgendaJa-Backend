@@ -1,6 +1,7 @@
 package com.mateusbosquetti.agendaja.mapper;
 
-import com.mateusbosquetti.agendaja.model.dto.response.UserResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.user.UserMeResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.User;
 
 public class UserMapper {
@@ -17,7 +18,20 @@ public class UserMapper {
     ) {
         return new UserResponseDTO(
                 user.getId(),
-                user.getName()
+                user.getName(),
+                user.getPhone(),
+                user.getCpf()
+        );
+    }
+
+    public static UserMeResponseDTO toMeDTO(
+            User user
+    ) {
+        return new UserMeResponseDTO(
+                user.getId(),
+                user.getName(),
+                user.getUserAuthentication().getEmail(),
+                user.getUserAuthentication().getRole()
         );
     }
 

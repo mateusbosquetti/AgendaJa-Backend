@@ -29,7 +29,7 @@ public class AuthService {
         return tokenService.generateToken((UserAuthentication) auth.getPrincipal());
     }
 
-    public void register(RegisterRequestDTO request) {
+    public String register(RegisterRequestDTO request) {
         if (authenticationService.existsByEmail(request.email())) {
             throw new IllegalArgumentException("E-mail já cadastrado");
         }
@@ -55,6 +55,7 @@ public class AuthService {
         auth.setUser(user);
 
         userService.createUser(user);
+        return tokenService.generateToken(auth);
     }
 
 }

@@ -2,7 +2,8 @@ package com.mateusbosquetti.agendaja.service;
 
 import com.mateusbosquetti.agendaja.mapper.ServiceMapper;
 import com.mateusbosquetti.agendaja.model.dto.request.ServiceProfessionalRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.request.ServiceRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.service.ServicePUTRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.service.ServiceRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.ServiceProfessionalResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
@@ -21,7 +22,6 @@ import java.util.List;
 public class ServiceService {
 
     private final ServiceRepository repository;
-    private final ServiceProfessionalService serviceProfessionalService;
 
     public ServiceResponseDTO createService(ServiceRequestDTO requestDTO) {
         ServiceEntity serviceEntity = ServiceEntity.builder()
@@ -40,8 +40,12 @@ public class ServiceService {
     }
 
     public ServiceResponseDTO getServiceById(Long id) {
+        ServiceEntity serviceEntity = this.getServiceEntityById(id);
+        return ServiceMapper.toDTO(serviceEntity);
+    }
+
+    public ServiceEntity getServiceEntityById(Long id) {
         return repository.findById(id)
-                .map(ServiceMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Service not found"));
     }
 
@@ -56,17 +60,18 @@ public class ServiceService {
         ).toList();
     }
 
-    public List<ServiceResponseDTO> getServicesByProfessional(Long professionalId) {
-        return this.serviceProfessionalService.getServicesByProfessional(professionalId).stream().map(
-                ServiceMapper::toDTO
-        ).toList();
-    }
-
     public void disableService(Long serviceId) {
         repository.deleteById(serviceId);
     }
 
-    public ServiceProfessionalResponseDTO associateProfessionalToService(ServiceProfessionalRequestDTO requestDTO) {
-        return this.serviceProfessionalService.associateProfessionalToService(requestDTO);
+    public ServiceResponseDTO updateService(Long id, ServicePUTRequestDTO requestDTO) {
+        ServiceEntity serviceEntity = this.getServiceEntityById(id);
+        serviceEntity.setName(requestDTO.name());
+        serviceEntity.setDescription(requestDTO.description());
+        serviceEntity.setDurationMinutes(requestDTO.durationMinutes());
+        serviceEntity.setPrice(requestDTO.price());
+
+        serviceEntity = repository.save(serviceEntity);
+        return ServiceMapper.toDTO(serviceEntity);
     }
 }

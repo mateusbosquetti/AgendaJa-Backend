@@ -33,7 +33,7 @@ public class Establishment extends BaseEntity {
 
     @OneToMany(mappedBy = "establishment", orphanRemoval = true)
     private List<ServiceEntity> serviceEntities;
-    @OneToMany(mappedBy = "establishment", orphanRemoval = true)
+    @OneToMany(mappedBy = "establishment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserEstablishment> usersRelated;
 
 }

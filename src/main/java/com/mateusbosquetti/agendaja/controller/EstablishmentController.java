@@ -1,19 +1,15 @@
 package com.mateusbosquetti.agendaja.controller;
 
-import com.mateusbosquetti.agendaja.model.dto.request.EstablishmentRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.request.UserEstablishmentRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.establishment.EstablishmentPUTRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.establishment.EstablishmentRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentAllResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentResponseDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.UserEstablishmentResponseDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.UserResponseDTO;
 import com.mateusbosquetti.agendaja.service.EstablishmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -22,8 +18,15 @@ public class EstablishmentController {
 
     private final EstablishmentService service;
 
+    @PostMapping()
+    public ResponseEntity<EstablishmentResponseDTO> createEstablishment(
+            @RequestBody EstablishmentRequestDTO requestDTO
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createEstablishment(requestDTO));
+    }
+
     @GetMapping
-    public ResponseEntity<Page<EstablishmentResponseDTO>> getEstablishments(
+    public ResponseEntity<Page<EstablishmentAllResponseDTO>> getEstablishments(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(required = false) String name
@@ -38,25 +41,12 @@ public class EstablishmentController {
         return ResponseEntity.ok(service.getEstablishmentById(id));
     }
 
-    @GetMapping("/{id}/employees")
-    public ResponseEntity<List<UserResponseDTO>> getEmployeesByEstablishment(
-            @PathVariable Long id
+    @PutMapping("/{id}")
+    public ResponseEntity<EstablishmentResponseDTO> updateEstablishment(
+            @PathVariable Long id,
+            @RequestBody EstablishmentPUTRequestDTO requestDTO
     ) {
-        return ResponseEntity.ok(service.getEmployeesByEstablishment(id));
-    }
-
-    @PostMapping()
-    public ResponseEntity<EstablishmentResponseDTO> createEstablishment(
-            @RequestBody EstablishmentRequestDTO requestDTO
-    ) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createEstablishment(requestDTO));
-    }
-
-    @PostMapping("/add-user")
-    public ResponseEntity<UserEstablishmentResponseDTO> addUserToEstablishment(
-            @RequestBody UserEstablishmentRequestDTO requestDTO
-    ) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.addUserToEstablishment(requestDTO));
+        return ResponseEntity.ok(service.updateEstablishment(id, requestDTO));
     }
 
     @DeleteMapping("/{id}")
@@ -64,16 +54,6 @@ public class EstablishmentController {
             @PathVariable Long id
     ) {
         service.disableEstablishment(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping("/{id}/disable-professional/{userId}")
-    public ResponseEntity<Void> disableUserAtEstablishment(
-            @PathVariable Long id,
-            @PathVariable Long userId,
-            Authentication authentication
-    ) {
-        service.disableUserAtEstablishment(id, userId, authentication);
         return ResponseEntity.noContent().build();
     }
 

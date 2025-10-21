@@ -1,8 +1,7 @@
 package com.mateusbosquetti.agendaja.controller;
 
-import com.mateusbosquetti.agendaja.model.dto.request.ServiceProfessionalRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.request.ServiceRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.ServiceProfessionalResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.service.ServicePUTRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.service.ServiceRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.service.ServiceService;
 import lombok.AllArgsConstructor;
@@ -42,13 +41,6 @@ public class ServiceController {
         return ResponseEntity.ok(service.getServiceById(id));
     }
 
-    @GetMapping("/professional/{professionalId}")
-    public ResponseEntity<List<ServiceResponseDTO>> getServicesByProfessional(
-            @PathVariable Long professionalId
-    ) {
-        return ResponseEntity.ok(service.getServicesByProfessional(professionalId));
-    }
-
     @PostMapping()
     public ResponseEntity<ServiceResponseDTO> createService(
             @RequestBody ServiceRequestDTO requestDTO
@@ -56,11 +48,12 @@ public class ServiceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createService(requestDTO));
     }
 
-    @PostMapping("/associate-professional")
-    public ResponseEntity<ServiceProfessionalResponseDTO> associateProfessionalToService(
-            @RequestBody ServiceProfessionalRequestDTO requestDTO
+    @PutMapping("/{id}")
+    public ResponseEntity<ServiceResponseDTO> updateService(
+            @PathVariable Long id,
+            @RequestBody ServicePUTRequestDTO requestDTO
     ) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(service.associateProfessionalToService(requestDTO));
+        return ResponseEntity.ok(service.updateService(id, requestDTO));
     }
 
     @DeleteMapping("/{id}")
