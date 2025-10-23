@@ -32,7 +32,7 @@ public class AppointmentController {
         return ResponseEntity.ok(service.getAppointmentById(id));
     }
 
-    @GetMapping("/user/{clientId}")
+    @GetMapping("/client/{clientId}")
     public ResponseEntity<List<AppointmentResponseDTO>> getAppointmentsByClient(
             @PathVariable Long clientId
     ) {
