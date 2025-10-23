@@ -1,11 +1,9 @@
 package com.mateusbosquetti.agendaja.service;
 
 import com.mateusbosquetti.agendaja.mapper.ServiceMapper;
-import com.mateusbosquetti.agendaja.model.dto.request.ServiceProfessionalRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.service.ServicePUTRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.service.ServiceRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.ServiceProfessionalResponseDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.service.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.model.entity.ServiceEntity;
 import com.mateusbosquetti.agendaja.repository.ServiceRepository;

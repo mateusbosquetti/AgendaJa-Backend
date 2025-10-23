@@ -3,10 +3,9 @@ package com.mateusbosquetti.agendaja.service;
 import com.mateusbosquetti.agendaja.mapper.EstablishmentCategoryMapper;
 import com.mateusbosquetti.agendaja.model.compositekey.EstablishmentCategoryId;
 import com.mateusbosquetti.agendaja.model.dto.request.EstablishmentCategoryRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentCategoryResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentCategoryResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.EstablishmentCategory;
 import com.mateusbosquetti.agendaja.repository.EstablishmentCategoryRepository;
-import com.mateusbosquetti.agendaja.repository.EstablishmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,7 @@
 package com.mateusbosquetti.agendaja.mapper;
 
-import com.mateusbosquetti.agendaja.model.dto.request.AddressRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.CategoryRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.CategoryResponseDTO;
-import com.mateusbosquetti.agendaja.model.entity.Address;
+import com.mateusbosquetti.agendaja.model.dto.response.category.CategoryResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Category;
 
 public class CategoryMapper {

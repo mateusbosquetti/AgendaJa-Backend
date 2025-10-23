@@ -3,7 +3,7 @@ package com.mateusbosquetti.agendaja.service;
 import com.mateusbosquetti.agendaja.mapper.UserEstablishmentMapper;
 import com.mateusbosquetti.agendaja.model.compositekey.UserEstablishmentId;
 import com.mateusbosquetti.agendaja.model.dto.request.UserEstablishmentRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.UserEstablishmentResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.userEstablishment.UserEstablishmentResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.model.entity.User;
 import com.mateusbosquetti.agendaja.model.entity.UserAuthentication;

@@ -1,4 +1,4 @@
-package com.mateusbosquetti.agendaja.model.dto.response;
+package com.mateusbosquetti.agendaja.model.dto.response.service;
 
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
 

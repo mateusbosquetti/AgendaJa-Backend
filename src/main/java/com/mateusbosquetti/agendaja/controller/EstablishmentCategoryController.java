@@ -1,10 +1,7 @@
 package com.mateusbosquetti.agendaja.controller;
 
 import com.mateusbosquetti.agendaja.model.dto.request.EstablishmentCategoryRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentCategoryResponseDTO;
-import com.mateusbosquetti.agendaja.model.entity.Establishment;
-import com.mateusbosquetti.agendaja.model.entity.EstablishmentCategory;
-import com.mateusbosquetti.agendaja.service.CategoryService;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentCategoryResponseDTO;
 import com.mateusbosquetti.agendaja.service.EstablishmentCategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,8 @@
 package com.mateusbosquetti.agendaja.mapper;
 
 import com.mateusbosquetti.agendaja.model.dto.request.establishment.EstablishmentRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentAllResponseDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentAllResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
 
 import java.util.ArrayList;
@@ -32,7 +32,11 @@ public class EstablishmentMapper {
                 establishment.getAddress(),
                 establishment.getServiceEntities().stream()
                         .map(ServiceMapper::toDTO)
+                        .toList(),
+                establishment.getUsersRelated().stream()
+                        .map(UserEstablishmentMapper::toUserInEstablishmentResponseDTO)
                         .toList()
+
         );
     }
 
@@ -43,11 +47,7 @@ public class EstablishmentMapper {
                 establishment.getId(),
                 establishment.getName(),
                 establishment.getCnpj(),
-                establishment.getAddress(),
-                establishment.getUsersRelated().stream().map(ue -> UserMapper.toMeDTO(ue.getUser())).toList(),
-                establishment.getServiceEntities().stream()
-                        .map(ServiceMapper::toDTO)
-                        .toList()
+                establishment.getAddress()
         );
     }
 

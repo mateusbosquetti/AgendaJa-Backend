@@ -1,7 +1,7 @@
 package com.mateusbosquetti.agendaja.controller;
 
 import com.mateusbosquetti.agendaja.model.dto.request.UserEstablishmentRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.UserEstablishmentResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.userEstablishment.UserEstablishmentResponseDTO;
 import com.mateusbosquetti.agendaja.service.UserEstablishmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

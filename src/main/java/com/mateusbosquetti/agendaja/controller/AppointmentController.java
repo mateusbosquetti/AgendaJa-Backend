@@ -2,7 +2,7 @@ package com.mateusbosquetti.agendaja.controller;
 
 import com.mateusbosquetti.agendaja.model.dto.request.appointment.AppointmentPUTRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.appointment.AppointmentRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.AppointmentResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.appointment.AppointmentResponseDTO;
 import com.mateusbosquetti.agendaja.service.AppointmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
