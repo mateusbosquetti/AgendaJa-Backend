@@ -6,6 +6,7 @@ import com.mateusbosquetti.agendaja.model.dto.response.user.UserMeResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.User;
 import com.mateusbosquetti.agendaja.model.entity.UserAuthentication;
+import com.mateusbosquetti.agendaja.model.enums.ThemeEnum;
 import com.mateusbosquetti.agendaja.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class UserService {
     public UserMeResponseDTO getMe(String email) {
         UserAuthentication auth = (UserAuthentication) authenticationService.loadUserByUsername(email);
         User user = auth.getUser();
-        return new UserMeResponseDTO(user.getId(), user.getName(), auth.getEmail(), auth.getRole());
+        return new UserMeResponseDTO(user.getId(), user.getName(), auth.getEmail(), auth.getRole(), user.getTheme());
     }
 
     public UserResponseDTO updateUser(Long id, RegisterRequestDTO requestDTO) {
@@ -42,6 +43,14 @@ public class UserService {
         user.setPhone(requestDTO.phone());
         user.setCpf(requestDTO.cpf());
         user = repository.save(user);
+        return UserMapper.toDTO(user);
+    }
+
+    public UserResponseDTO updateUserTheme(Long id, String theme) {
+        User user = this.getUserEntityById(id);
+        user.setTheme(ThemeEnum.valueOf(theme));
+        user = repository.save(user);
+
         return UserMapper.toDTO(user);
     }
 }

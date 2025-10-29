@@ -1,5 +1,6 @@
 package com.mateusbosquetti.agendaja.model.entity;
 
+import com.mateusbosquetti.agendaja.model.enums.ThemeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -29,6 +30,10 @@ public class User extends BaseEntity {
     private String cpf;
     @Column(unique = true, length = 11)
     private String phone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "varchar(20) default 'DARK'")
+    private ThemeEnum theme = ThemeEnum.DARK;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserAuthentication userAuthentication;
