@@ -20,7 +20,8 @@ public class UserMapper {
                 user.getId(),
                 user.getName(),
                 user.getPhone(),
-                user.getCpf()
+                user.getCpf(),
+                user.getTheme()
         );
     }
 
@@ -31,7 +32,8 @@ public class UserMapper {
                 user.getId(),
                 user.getName(),
                 user.getUserAuthentication().getEmail(),
-                user.getUserAuthentication().getRole()
+                user.getUserAuthentication().getRole(),
+                user.getTheme()
         );
     }
 

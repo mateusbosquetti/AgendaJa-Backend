@@ -3,6 +3,7 @@ package com.mateusbosquetti.agendaja.controller;
 import com.mateusbosquetti.agendaja.model.dto.request.RegisterRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserMeResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
+import com.mateusbosquetti.agendaja.model.enums.ThemeEnum;
 import com.mateusbosquetti.agendaja.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,14 @@ public class UserController {
             @RequestBody RegisterRequestDTO requestDTO
     ) {
         return ResponseEntity.ok(service.updateUser(id, requestDTO));
+    }
+
+    @PatchMapping("/{id}/theme")
+    public ResponseEntity<UserResponseDTO> updateUserTheme(
+            @PathVariable Long id,
+            @RequestBody String theme
+            ) {
+        return ResponseEntity.ok(service.updateUserTheme(id, theme));
     }
 
 }

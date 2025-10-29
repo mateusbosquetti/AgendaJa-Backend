@@ -1,6 +1,6 @@
 package com.mateusbosquetti.agendaja.mapper;
 
-import com.mateusbosquetti.agendaja.model.dto.response.ServiceResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.service.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.ServiceEntity;
 
 public class ServiceMapper {

@@ -1,15 +1,11 @@
 package com.mateusbosquetti.agendaja.service;
 
 import com.mateusbosquetti.agendaja.mapper.EstablishmentMapper;
-import com.mateusbosquetti.agendaja.mapper.UserMapper;
 import com.mateusbosquetti.agendaja.model.compositekey.UserEstablishmentId;
 import com.mateusbosquetti.agendaja.model.dto.request.establishment.EstablishmentPUTRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.establishment.EstablishmentRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.request.UserEstablishmentRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentAllResponseDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentResponseDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.UserEstablishmentResponseDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentAllResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.model.entity.User;
 import com.mateusbosquetti.agendaja.model.entity.UserEstablishment;
@@ -24,9 +20,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @AllArgsConstructor

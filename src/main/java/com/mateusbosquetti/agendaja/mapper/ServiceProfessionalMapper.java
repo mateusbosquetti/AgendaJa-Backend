@@ -2,7 +2,7 @@ package com.mateusbosquetti.agendaja.mapper;
 
 import com.mateusbosquetti.agendaja.model.compositekey.ServiceProfessionalId;
 import com.mateusbosquetti.agendaja.model.dto.request.ServiceProfessionalRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.ServiceProfessionalResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.service.ServiceProfessionalResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.ServiceEntity;
 import com.mateusbosquetti.agendaja.model.entity.ServiceProfessional;
 import com.mateusbosquetti.agendaja.model.entity.User;

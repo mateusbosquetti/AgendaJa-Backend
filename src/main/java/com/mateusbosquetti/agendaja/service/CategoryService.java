@@ -2,7 +2,7 @@ package com.mateusbosquetti.agendaja.service;
 
 import com.mateusbosquetti.agendaja.mapper.CategoryMapper;
 import com.mateusbosquetti.agendaja.model.dto.request.CategoryRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.CategoryResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.category.CategoryResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Category;
 import com.mateusbosquetti.agendaja.repository.CategoryRepository;
 import lombok.AllArgsConstructor;

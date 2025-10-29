@@ -2,6 +2,7 @@ package com.mateusbosquetti.agendaja.controller;
 
 import com.mateusbosquetti.agendaja.model.dto.request.LoginRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.RegisterRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.TokenResponseDTO;
 import com.mateusbosquetti.agendaja.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,14 +20,14 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(
+    public ResponseEntity<TokenResponseDTO> login(
             @RequestBody LoginRequestDTO requestDTO
     ) {
         return ResponseEntity.ok(authService.login(requestDTO));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(
+    public ResponseEntity<TokenResponseDTO> register(
             @RequestBody RegisterRequestDTO requestDTO
             ) {
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(requestDTO));

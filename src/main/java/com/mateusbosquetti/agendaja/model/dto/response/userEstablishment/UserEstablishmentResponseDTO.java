@@ -1,4 +1,4 @@
-package com.mateusbosquetti.agendaja.model.dto.response;
+package com.mateusbosquetti.agendaja.model.dto.response.userEstablishment;
 
 import com.mateusbosquetti.agendaja.model.enums.FunctionRole;
 

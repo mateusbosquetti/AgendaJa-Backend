@@ -2,8 +2,10 @@ package com.mateusbosquetti.agendaja.service;
 
 import com.mateusbosquetti.agendaja.model.dto.request.LoginRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.RegisterRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.TokenResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.User;
 import com.mateusbosquetti.agendaja.model.entity.UserAuthentication;
+import com.mateusbosquetti.agendaja.model.enums.ThemeEnum;
 import com.mateusbosquetti.agendaja.model.enums.UserRole;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,13 +25,14 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public String login (LoginRequestDTO requestDTO) {
+    public TokenResponseDTO login (LoginRequestDTO requestDTO) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(requestDTO.email(), requestDTO.password());
         Authentication auth = authenticationManager.authenticate(authenticationToken);
-        return tokenService.generateToken((UserAuthentication) auth.getPrincipal());
+        String token = tokenService.generateToken((UserAuthentication) auth.getPrincipal());
+        return new TokenResponseDTO(token);
     }
 
-    public String register(RegisterRequestDTO request) {
+    public TokenResponseDTO register(RegisterRequestDTO request) {
         if (authenticationService.existsByEmail(request.email())) {
             throw new IllegalArgumentException("E-mail já cadastrado");
         }
@@ -50,12 +53,15 @@ public class AuthService {
                 .cpf(request.cpf())
                 .phone(request.phone())
                 .userAuthentication(auth)
+                .theme(ThemeEnum.DARK)
                 .build();
 
         auth.setUser(user);
 
         userService.createUser(user);
-        return tokenService.generateToken(auth);
+        String token = tokenService.generateToken(auth);
+        return new TokenResponseDTO(token);
+
     }
 
 }

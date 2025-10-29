@@ -1,7 +1,7 @@
 package com.mateusbosquetti.agendaja.mapper;
 
 import com.mateusbosquetti.agendaja.model.dto.request.EstablishmentCategoryRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.EstablishmentCategoryResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentCategoryResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Category;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.model.entity.EstablishmentCategory;

@@ -1,5 +1,6 @@
-package com.mateusbosquetti.agendaja.model.dto.response;
+package com.mateusbosquetti.agendaja.model.dto.response.appointment;
 
+import com.mateusbosquetti.agendaja.model.dto.response.service.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
 
 import java.time.LocalDateTime;

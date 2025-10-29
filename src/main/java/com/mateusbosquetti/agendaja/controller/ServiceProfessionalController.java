@@ -1,7 +1,7 @@
 package com.mateusbosquetti.agendaja.controller;
 
 import com.mateusbosquetti.agendaja.model.dto.request.ServiceProfessionalRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.ServiceProfessionalResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.service.ServiceProfessionalResponseDTO;
 import com.mateusbosquetti.agendaja.service.ServiceProfessionalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,13 +1,9 @@
 package com.mateusbosquetti.agendaja.controller;
 
 import com.mateusbosquetti.agendaja.model.dto.request.CategoryRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.CategoryResponseDTO;
-import com.mateusbosquetti.agendaja.model.entity.Category;
-import com.mateusbosquetti.agendaja.model.entity.Category;
-import com.mateusbosquetti.agendaja.service.CategoryService;
+import com.mateusbosquetti.agendaja.model.dto.response.category.CategoryResponseDTO;
 import com.mateusbosquetti.agendaja.service.CategoryService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +25,7 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponseDTO>> getCategoriess(
+    public ResponseEntity<List<CategoryResponseDTO>> getCategories(
     ) {
         return ResponseEntity.ok(service.getCategories());
     }
