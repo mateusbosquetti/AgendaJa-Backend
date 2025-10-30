@@ -1,6 +1,7 @@
 package com.mateusbosquetti.agendaja.controller;
 
 import com.mateusbosquetti.agendaja.model.dto.request.RegisterRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.UserThemePATCHRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserMeResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
 import com.mateusbosquetti.agendaja.model.enums.ThemeEnum;
@@ -41,9 +42,9 @@ public class UserController {
     @PatchMapping("/{id}/theme")
     public ResponseEntity<UserResponseDTO> updateUserTheme(
             @PathVariable Long id,
-            @RequestBody String theme
-            ) {
-        return ResponseEntity.ok(service.updateUserTheme(id, theme));
+            @RequestBody UserThemePATCHRequestDTO dto
+    ) {
+        return ResponseEntity.ok(service.updateUserTheme(id, dto));
     }
 
 }

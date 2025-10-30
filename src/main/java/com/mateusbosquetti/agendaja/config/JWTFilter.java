@@ -5,6 +5,7 @@ import com.mateusbosquetti.agendaja.service.TokenService;
 import com.mateusbosquetti.agendaja.service.UserAuthenticationService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -38,11 +39,20 @@ public class JWTFilter extends OncePerRequestFilter {
     }
 
     private String recoverToken(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token == null || !token.startsWith("Bearer ")) {
-            return null;
+        String header = request.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            return header.substring(7);
         }
-        return token.replace("Bearer ", "");
+
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("token")) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
+
 
 }

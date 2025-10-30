@@ -2,11 +2,11 @@ package com.mateusbosquetti.agendaja.service;
 
 import com.mateusbosquetti.agendaja.mapper.UserMapper;
 import com.mateusbosquetti.agendaja.model.dto.request.RegisterRequestDTO;
+import com.mateusbosquetti.agendaja.model.dto.request.UserThemePATCHRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserMeResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.User;
 import com.mateusbosquetti.agendaja.model.entity.UserAuthentication;
-import com.mateusbosquetti.agendaja.model.enums.ThemeEnum;
 import com.mateusbosquetti.agendaja.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,9 +46,9 @@ public class UserService {
         return UserMapper.toDTO(user);
     }
 
-    public UserResponseDTO updateUserTheme(Long id, String theme) {
+    public UserResponseDTO updateUserTheme(Long id, UserThemePATCHRequestDTO dto) {
         User user = this.getUserEntityById(id);
-        user.setTheme(ThemeEnum.valueOf(theme));
+        user.setTheme(dto.theme());
         user = repository.save(user);
 
         return UserMapper.toDTO(user);
