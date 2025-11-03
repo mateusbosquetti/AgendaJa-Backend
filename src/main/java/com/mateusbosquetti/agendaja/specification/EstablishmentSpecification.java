@@ -11,7 +11,7 @@ public class EstablishmentSpecification {
                                 return criteriaBuilder.conjunction(); // no filter
             }
             return criteriaBuilder.like(
-                    criteriaBuilder.lower(root.get("userName")),
+                    criteriaBuilder.lower(root.get("name")),
                     "%" + name.toLowerCase() + "%"
             );
         };
