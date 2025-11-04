@@ -21,19 +21,8 @@ public class UserMapper {
                 user.getName(),
                 user.getPhone(),
                 user.getCpf(),
-                user.getTheme()
-        );
-    }
-
-    public static UserMeResponseDTO toMeDTO(
-            User user
-    ) {
-        return new UserMeResponseDTO(
-                user.getId(),
-                user.getName(),
-                user.getUserAuthentication().getEmail(),
-                user.getUserAuthentication().getRole(),
-                user.getTheme()
+                user.getTheme(),
+                user.getPhotoKey()
         );
     }
 

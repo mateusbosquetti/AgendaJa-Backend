@@ -31,6 +31,9 @@ public class User extends BaseEntity {
     @Column(unique = true, length = 11)
     private String phone;
 
+    @Column()
+    private String photoKey;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, columnDefinition = "varchar(20) default 'DARK'")
     private ThemeEnum theme = ThemeEnum.DARK;
