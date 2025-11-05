@@ -4,13 +4,11 @@ import com.mateusbosquetti.agendaja.model.dto.request.RegisterRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.UserThemePATCHRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserMeResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
-import com.mateusbosquetti.agendaja.model.enums.ThemeEnum;
 import com.mateusbosquetti.agendaja.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @AllArgsConstructor
@@ -47,17 +45,5 @@ public class UserController {
     ) {
         return ResponseEntity.ok(service.updateUserTheme(id, dto));
     }
-
-    @PatchMapping("/{id}/photo")
-    public ResponseEntity<String> uploadPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
-        String fileUrl = service.updateUserPhoto(id, file);
-        return ResponseEntity.ok(fileUrl);
-    }
-
-//    @GetMapping("/{fileName}")
-//    public ResponseEntity<String> getFileUrl(@PathVariable String fileName) {
-//        String url = minioService.getFileUrl(fileName);
-//        return ResponseEntity.ok(url);
-//    }
 
 }

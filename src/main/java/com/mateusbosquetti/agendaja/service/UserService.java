@@ -10,7 +10,6 @@ import com.mateusbosquetti.agendaja.model.entity.UserAuthentication;
 import com.mateusbosquetti.agendaja.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @AllArgsConstructor
@@ -36,7 +35,7 @@ public class UserService {
     public UserMeResponseDTO getMe(String email) {
         UserAuthentication auth = (UserAuthentication) authenticationService.loadUserByUsername(email);
         User user = auth.getUser();
-        return new UserMeResponseDTO(user.getId(), user.getName(), auth.getEmail(), auth.getRole(), user.getTheme(), minioService.getFileUrl(user.getPhotoKey()));
+        return new UserMeResponseDTO(user.getId(), user.getName(), auth.getEmail(), auth.getRole(), user.getTheme(), minioService.getFileUrl(user.getProfilePicture().getKey()));
     }
 
     public UserResponseDTO updateUser(Long id, RegisterRequestDTO requestDTO) {
@@ -56,12 +55,4 @@ public class UserService {
         return UserMapper.toDTO(user);
     }
 
-    public String updateUserPhoto(Long id, MultipartFile file) {
-        User user = this.getUserEntityById(id);
-
-        String key = minioService.uploadFile(file);
-        user.setPhotoKey(key);
-        repository.save(user);
-        return  minioService.getFileUrl(key);
-    }
 }

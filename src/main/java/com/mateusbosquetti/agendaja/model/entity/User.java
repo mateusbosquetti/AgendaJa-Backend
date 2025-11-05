@@ -31,11 +31,12 @@ public class User extends BaseEntity {
     @Column(unique = true, length = 11)
     private String phone;
 
-    @Column()
-    private String photoKey;
+    @OneToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_photo"))
+    private File profilePicture;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "varchar(20) default 'DARK'")
+    @Column(nullable = false)
     private ThemeEnum theme = ThemeEnum.DARK;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -54,5 +55,12 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<UserEstablishment> establishmentsRelated;
 
+    @PrePersist
+    public void prePersist() {
+        if (this.profilePicture == null) {
+            this.profilePicture = new File();
+            this.profilePicture.setId(1L);
+        }
+    }
 
 }

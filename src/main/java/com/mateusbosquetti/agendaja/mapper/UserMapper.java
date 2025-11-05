@@ -1,6 +1,5 @@
 package com.mateusbosquetti.agendaja.mapper;
 
-import com.mateusbosquetti.agendaja.model.dto.response.user.UserMeResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.user.UserResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.User;
 
@@ -22,7 +21,7 @@ public class UserMapper {
                 user.getPhone(),
                 user.getCpf(),
                 user.getTheme(),
-                user.getPhotoKey()
+                user.getProfilePicture().getKey()
         );
     }
 
