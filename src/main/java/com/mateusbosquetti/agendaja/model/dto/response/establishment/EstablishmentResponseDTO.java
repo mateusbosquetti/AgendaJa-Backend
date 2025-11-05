@@ -11,6 +11,8 @@ public record EstablishmentResponseDTO(
         String name,
         String cnpj,
         Address address,
+        String logoUrl,
+//        List<String> photosUrls,
         List<ServiceResponseDTO> services,
         List<UserInEstablishmentResponseDTO> usersRelated
 ) {

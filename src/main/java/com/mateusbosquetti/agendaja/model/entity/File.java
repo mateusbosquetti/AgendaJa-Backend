@@ -26,5 +26,9 @@ public class File {
     @ToString.Exclude
     User user;
 
+    @OneToOne(mappedBy = "logo")
+    @JsonIgnore
+    @ToString.Exclude
+    Establishment establishment;
 
 }

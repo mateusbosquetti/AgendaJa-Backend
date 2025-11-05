@@ -4,11 +4,23 @@ import com.mateusbosquetti.agendaja.model.dto.request.establishment.Establishmen
 import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentAllResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
+import com.mateusbosquetti.agendaja.service.MinioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class EstablishmentMapper {
+
+    private static MinioService minioService;
+
+    @Autowired
+    public EstablishmentMapper(MinioService minioService) {
+        EstablishmentMapper.minioService = minioService;
+    }
+
 
     public static Establishment toEntity(
             EstablishmentRequestDTO requestDTO
@@ -30,6 +42,7 @@ public class EstablishmentMapper {
                 establishment.getName(),
                 establishment.getCnpj(),
                 establishment.getAddress(),
+                minioService.getFileUrl(establishment.getLogo().getKey()),
                 establishment.getServiceEntities().stream()
                         .map(ServiceMapper::toDTO)
                         .toList(),

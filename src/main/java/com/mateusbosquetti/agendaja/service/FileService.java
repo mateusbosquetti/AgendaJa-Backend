@@ -46,6 +46,7 @@ public class FileService {
         File logo = File.builder()
                 .key(key)
                 .name(file.getName())
+                .establishment(establishment)
                 .build();
 
         establishment.setLogo(logo);
