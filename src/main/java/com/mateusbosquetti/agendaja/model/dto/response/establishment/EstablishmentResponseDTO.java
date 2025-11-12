@@ -1,7 +1,7 @@
 package com.mateusbosquetti.agendaja.model.dto.response.establishment;
 
 import com.mateusbosquetti.agendaja.model.dto.response.service.ServiceResponseDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.userEstablishment.UserInEstablishmentResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.userEstablishment.UserEstablishmentResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Address;
 
 import java.util.List;
@@ -12,8 +12,7 @@ public record EstablishmentResponseDTO(
         String cnpj,
         Address address,
         String logoUrl,
-//        List<String> photosUrls,
         List<ServiceResponseDTO> services,
-        List<UserInEstablishmentResponseDTO> usersRelated
+        List<UserEstablishmentResponseDTO> usersRelated
 ) {
 }

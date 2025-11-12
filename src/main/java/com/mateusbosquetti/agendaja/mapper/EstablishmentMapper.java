@@ -34,34 +34,34 @@ public class EstablishmentMapper {
 //                .build();
 //    }
 
-    public static EstablishmentResponseDTO toDTO(
-            Establishment establishment
-    ) {
-        return new EstablishmentResponseDTO(
-                establishment.getId(),
-                establishment.getName(),
-                establishment.getCnpj(),
-                establishment.getAddress(),
-                minioService.getFileUrl(establishment.getLogo().getKey()),
-                establishment.getServiceEntities().stream()
-                        .map(ServiceMapper::toDTO)
-                        .toList(),
-                establishment.getUsersRelated().stream()
-                        .map(UserEstablishmentMapper::toUserInEstablishmentResponseDTO)
-                        .toList()
+//    public static EstablishmentResponseDTO toDTO(
+//            Establishment establishment
+//    ) {
+//        return new EstablishmentResponseDTO(
+//                establishment.getId(),
+//                establishment.getName(),
+//                establishment.getCnpj(),
+//                establishment.getAddress(),
+//                minioService.getFileUrl(establishment.getLogo().getKey()),
+//                establishment.getServiceEntities().stream()
+//                        .map(ServiceMapper::toDTO)
+//                        .toList(),
+//                establishment.getUsersRelated().stream()
+//                        .map(UserEstablishmentMapper::toUserInEstablishmentResponseDTO)
+//                        .toList()
+//
+//        );
+//    }
 
-        );
-    }
-
-    public static EstablishmentAllResponseDTO toAllDTO(
-            Establishment establishment
-    ) {
-        return new EstablishmentAllResponseDTO(
-                establishment.getId(),
-                establishment.getName(),
-                establishment.getCnpj(),
-                establishment.getAddress()
-        );
-    }
+//    public static EstablishmentAllResponseDTO toAllDTO(
+//            Establishment establishment
+//    ) {
+//        return new EstablishmentAllResponseDTO(
+//                establishment.getId(),
+//                establishment.getName(),
+//                establishment.getCnpj(),
+//                establishment.getAddress()
+//        );
+//    }
 
 }

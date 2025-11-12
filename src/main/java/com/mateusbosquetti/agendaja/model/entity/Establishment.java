@@ -37,10 +37,8 @@ public class Establishment extends BaseEntity {
     private Address address;
 
     @OneToMany(mappedBy = "establishment", orphanRemoval = true)
-    @JsonIgnore
     private List<ServiceEntity> serviceEntities;
     @OneToMany(mappedBy = "establishment", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<UserEstablishment> usersRelated;
 
     @PrePersist

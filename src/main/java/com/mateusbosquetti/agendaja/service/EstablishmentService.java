@@ -1,12 +1,12 @@
 package com.mateusbosquetti.agendaja.service;
 
-import com.mateusbosquetti.agendaja.mapper.EstablishmentMapper;
 import com.mateusbosquetti.agendaja.model.compositekey.UserEstablishmentId;
-import com.mateusbosquetti.agendaja.model.dto.request.AddressRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.establishment.EstablishmentPUTRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.request.establishment.EstablishmentRequestDTO;
-import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentAllResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentSummaryDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.service.ServiceResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.userEstablishment.UserEstablishmentResponseDTO;
 import com.mateusbosquetti.agendaja.model.entity.Address;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.model.entity.User;
@@ -23,8 +23,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class EstablishmentService {
@@ -34,8 +32,10 @@ public class EstablishmentService {
     private final AddressService addressService;
     private final UserEstablishmentRepository userEstablishmentRepository;
 
-    public Establishment getEstablishmentById(Long id) {
-        return this.getEstablishmentEntityById(id);
+    public EstablishmentResponseDTO getEstablishmentById(Long id) {
+        Establishment establishment = this.getEstablishmentEntityById(id);
+
+        return this.toResposeDTO(establishment);
     }
 
     public Establishment getEstablishmentEntityById(Long id) {
@@ -66,12 +66,13 @@ public class EstablishmentService {
         userEstablishmentRepository.save(userEstablishment);
     }
 
-    public Page<Establishment> getEstablishments(int page, int size, String name) {
+    public Page<EstablishmentSummaryDTO> getEstablishments(int page, int size, String name) {
         Pageable pageable = PageRequest.of(page, size);
 
         Specification<Establishment> spec = EstablishmentSpecification.nameContains(name);
 
-        return repository.findAll(spec, pageable);
+        return repository.findAll(spec, pageable)
+                .map(this::toSummaryDTO);
     }
 
     public void disableEstablishment(Long id) {
@@ -87,4 +88,42 @@ public class EstablishmentService {
 
         repository.save(establishment);
     }
+
+    private EstablishmentSummaryDTO toSummaryDTO(Establishment establishment) {
+        return new EstablishmentSummaryDTO(
+                establishment.getId(),
+                establishment.getName(),
+                establishment.getCnpj(),
+                establishment.getAddress(),
+                establishment.getLogo().getKey()
+        );
+    }
+
+    private EstablishmentResponseDTO toResposeDTO (Establishment establishment) {
+        return new EstablishmentResponseDTO(
+                establishment.getId(),
+                establishment.getName(),
+                establishment.getCnpj(),
+                establishment.getAddress(),
+                establishment.getLogo().getKey(),
+                establishment.getServiceEntities().stream()
+                        .map(service -> new ServiceResponseDTO(
+                                service.getId(),
+                                service.getName(),
+                                service.getDescription(),
+                                service.getDurationMinutes(),
+                                service.getPrice(),
+                                establishment.getId()
+                        ))
+                        .toList(),
+                establishment.getUsersRelated().stream()
+                        .map(userEstablishment -> new UserEstablishmentResponseDTO(
+                                establishment.getId(),
+                                userEstablishment.getUser().getId(),
+                                userEstablishment.getFunctionRole()
+                        ))
+                        .toList()
+        );
+    }
+
 }

@@ -4,6 +4,7 @@ import com.mateusbosquetti.agendaja.model.dto.request.establishment.Establishmen
 import com.mateusbosquetti.agendaja.model.dto.request.establishment.EstablishmentRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentAllResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentResponseDTO;
+import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentSummaryDTO;
 import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.service.EstablishmentService;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class EstablishmentController {
 
     private final EstablishmentService service;
 
+    //OK
     @PostMapping()
     public ResponseEntity<Void> createEstablishment(
             @RequestBody EstablishmentRequestDTO requestDTO
@@ -27,8 +29,9 @@ public class EstablishmentController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    //OK
     @GetMapping
-    public ResponseEntity<Page<Establishment>> getEstablishments(
+    public ResponseEntity<Page<EstablishmentSummaryDTO>> getEstablishments(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(required = false) String name
@@ -36,8 +39,9 @@ public class EstablishmentController {
         return ResponseEntity.ok(service.getEstablishments(page, size, name));
     }
 
+    //OK
     @GetMapping("/{id}")
-    public ResponseEntity<Establishment> getEstablishmentById(
+    public ResponseEntity<EstablishmentResponseDTO> getEstablishmentById(
             @PathVariable Long id
     ) {
         return ResponseEntity.ok(service.getEstablishmentById(id));

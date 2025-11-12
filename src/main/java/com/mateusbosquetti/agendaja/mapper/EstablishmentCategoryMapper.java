@@ -21,7 +21,8 @@ public class EstablishmentCategoryMapper {
             EstablishmentCategory establishmentCategory
     ) {
         return new EstablishmentCategoryResponseDTO(
-                EstablishmentMapper.toDTO(establishmentCategory.getEstablishment()),
+//                EstablishmentMapper.toDTO(establishmentCategory.getEstablishment()),
+                null,
                 CategoryMapper.toDTO(establishmentCategory.getCategory())
         );
     }
