@@ -1,5 +1,6 @@
 package com.mateusbosquetti.agendaja.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mateusbosquetti.agendaja.model.compositekey.UserEstablishmentId;
 import com.mateusbosquetti.agendaja.model.enums.FunctionRole;
 import jakarta.persistence.*;

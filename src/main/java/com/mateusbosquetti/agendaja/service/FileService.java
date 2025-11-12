@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class FileService {
@@ -29,7 +31,8 @@ public class FileService {
         File profilePicture = File.builder()
                 .key(key)
                 .name(file.getName())
-                .user(user)
+                .users(List.of(user))
+                .establishments(List.of())
                 .build();
 
         user.setProfilePicture(profilePicture);
@@ -46,7 +49,8 @@ public class FileService {
         File logo = File.builder()
                 .key(key)
                 .name(file.getName())
-                .establishment(establishment)
+                .establishments(List.of(establishment))
+                .users(List.of())
                 .build();
 
         establishment.setLogo(logo);

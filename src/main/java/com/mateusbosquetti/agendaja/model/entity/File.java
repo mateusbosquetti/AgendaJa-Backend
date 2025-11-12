@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Builder
 @Entity(name = "files")
 @Data
@@ -21,14 +23,12 @@ public class File {
     @Column()
     private String name;
 
-    @OneToOne(mappedBy = "profilePicture")
+    @OneToMany(mappedBy = "profilePicture")
     @JsonIgnore
-    @ToString.Exclude
-    User user;
+    List<User> users;
 
-    @OneToOne(mappedBy = "logo")
+    @OneToMany(mappedBy = "logo")
     @JsonIgnore
-    @ToString.Exclude
-    Establishment establishment;
+    List<Establishment> establishments;
 
 }

@@ -31,7 +31,7 @@ public class User extends BaseEntity {
     @Column(unique = true, length = 11)
     private String phone;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_photo"))
     private File profilePicture;
 

@@ -22,17 +22,17 @@ public class EstablishmentMapper {
     }
 
 
-    public static Establishment toEntity(
-            EstablishmentRequestDTO requestDTO
-    ) {
-        return Establishment.builder()
-                .name(requestDTO.name())
-                .cnpj(requestDTO.cnpj())
-                .address(AddressMapper.toEntity(requestDTO.address()))
-                .serviceEntities(List.of())
-                .usersRelated(new ArrayList<>())
-                .build();
-    }
+//    public static Establishment toEntity(
+//            EstablishmentRequestDTO requestDTO
+//    ) {
+//        return Establishment.builder()
+//                .name(requestDTO.name())
+//                .cnpj(requestDTO.cnpj())
+//                .address(AddressMapper.toEntity(requestDTO.address()))
+//                .serviceEntities(List.of())
+//                .usersRelated(new ArrayList<>())
+//                .build();
+//    }
 
     public static EstablishmentResponseDTO toDTO(
             Establishment establishment
