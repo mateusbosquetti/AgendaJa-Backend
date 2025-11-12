@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -47,20 +48,23 @@ public class EstablishmentController {
         return ResponseEntity.ok(service.getEstablishmentById(id));
     }
 
+    //OK
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateEstablishment(
             @PathVariable Long id,
-            @RequestBody EstablishmentPUTRequestDTO requestDTO
+            @RequestBody EstablishmentPUTRequestDTO requestDTO,
+            Authentication authentication
     ) {
-        service.updateEstablishment(id, requestDTO);
+        service.updateEstablishment(id, requestDTO, authentication);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> disableEstablishment(
-            @PathVariable Long id
+            @PathVariable Long id,
+            Authentication authentication
     ) {
-        service.disableEstablishment(id);
+        service.disableEstablishment(id, authentication);
         return ResponseEntity.noContent().build();
     }
 

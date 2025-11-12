@@ -7,11 +7,9 @@ import com.mateusbosquetti.agendaja.model.dto.response.establishment.Establishme
 import com.mateusbosquetti.agendaja.model.dto.response.establishment.EstablishmentSummaryDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.service.ServiceResponseDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.userEstablishment.UserEstablishmentResponseDTO;
-import com.mateusbosquetti.agendaja.model.entity.Address;
-import com.mateusbosquetti.agendaja.model.entity.Establishment;
-import com.mateusbosquetti.agendaja.model.entity.User;
-import com.mateusbosquetti.agendaja.model.entity.UserEstablishment;
+import com.mateusbosquetti.agendaja.model.entity.*;
 import com.mateusbosquetti.agendaja.model.enums.FunctionRole;
+import com.mateusbosquetti.agendaja.model.enums.UserRole;
 import com.mateusbosquetti.agendaja.repository.EstablishmentRepository;
 import com.mateusbosquetti.agendaja.repository.UserEstablishmentRepository;
 import com.mateusbosquetti.agendaja.specification.EstablishmentSpecification;
@@ -21,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,29 +28,26 @@ public class EstablishmentService {
 
     private final EstablishmentRepository repository;
     private final UserService userService;
-    private final AddressService addressService;
     private final UserEstablishmentRepository userEstablishmentRepository;
-
-    public EstablishmentResponseDTO getEstablishmentById(Long id) {
-        Establishment establishment = this.getEstablishmentEntityById(id);
-
-        return this.toResposeDTO(establishment);
-    }
-
-    public Establishment getEstablishmentEntityById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Establishment not found: id=" + id));
-    }
 
     public void createEstablishment(EstablishmentRequestDTO requestDTO) {
         User user = userService.getUserEntityById(requestDTO.ownerId());
 
-        Address address = addressService.createAddress(requestDTO.address());
-
         Establishment establishment = Establishment.builder()
                 .name(requestDTO.name())
                 .cnpj(requestDTO.cnpj())
-                .address(address)
+                .address(
+                        Address.builder()
+                                .number(requestDTO.address().number())
+                                .street(requestDTO.address().street())
+                                .city(requestDTO.address().city())
+                                .stateProvince(requestDTO.address().stateProvince())
+                                .countryCode(requestDTO.address().countryCode())
+                                .postalCode(requestDTO.address().postalCode())
+                                .latitude(requestDTO.address().latitude())
+                                .longitude(requestDTO.address().longitude())
+                                .build()
+                )
                 .build();
 
         establishment = repository.save(establishment);
@@ -66,6 +62,17 @@ public class EstablishmentService {
         userEstablishmentRepository.save(userEstablishment);
     }
 
+    public EstablishmentResponseDTO getEstablishmentById(Long id) {
+        Establishment establishment = this.getEstablishmentEntityById(id);
+
+        return this.toResposeDTO(establishment);
+    }
+
+    public Establishment getEstablishmentEntityById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Establishment not found: id=" + id));
+    }
+
     public Page<EstablishmentSummaryDTO> getEstablishments(int page, int size, String name) {
         Pageable pageable = PageRequest.of(page, size);
 
@@ -75,18 +82,53 @@ public class EstablishmentService {
                 .map(this::toSummaryDTO);
     }
 
-    public void disableEstablishment(Long id) {
-        repository.deleteById(id);
-    }
+    public void updateEstablishment(Long id, EstablishmentPUTRequestDTO requestDTO, Authentication authentication) {
+        Establishment establishment = this.getEstablishmentEntityById(id);
 
-    public void updateEstablishment(Long id, EstablishmentPUTRequestDTO requestDTO) {
-        Establishment establishment = getEstablishmentEntityById(id);
+        if (!this.checkUserPermission(establishment, authentication)) {
+            throw new RuntimeException("Access denied: You do not have permission to delete this establishment.");
+        }
+
         establishment.setName(requestDTO.name());
         establishment.setCnpj(requestDTO.cnpj());
 
-        addressService.updateAddress(establishment.getAddress().getId(), requestDTO.address());
+        Address address = establishment.getAddress();
+        address.setNumber(requestDTO.address().number());
+        address.setStreet(requestDTO.address().street());
+        address.setCity(requestDTO.address().city());
+        address.setStateProvince(requestDTO.address().stateProvince());
+        address.setCountryCode(requestDTO.address().countryCode());
+        address.setPostalCode(requestDTO.address().postalCode());
+        address.setLatitude(requestDTO.address().latitude());
+        address.setLongitude(requestDTO.address().longitude());
+
+        establishment.setAddress(address);
 
         repository.save(establishment);
+    }
+
+    public void disableEstablishment(Long id, Authentication authentication) {
+        Establishment establishment = this.getEstablishmentEntityById(id);
+        if (!this.checkUserPermission(establishment, authentication)) {
+            throw new RuntimeException("Access denied: You do not have permission to delete this establishment.");
+        }
+        repository.deleteById(id);
+    }
+
+    private boolean checkUserPermission(Establishment establishment, Authentication authentication) {
+        UserAuthentication userAuthentication = (UserAuthentication) authentication.getPrincipal();
+        User user = userAuthentication.getUser();
+
+        boolean isAdmin = userAuthentication.getRole().equals(UserRole.ADMIN);
+        boolean isOwner = establishment.getUsersRelated()
+                .stream()
+                .anyMatch(ue -> ue.getFunctionRole() == FunctionRole.OWNER
+                        && ue.getUser().equals(user));
+
+        if (!isOwner && !isAdmin) {
+            return false;
+        }
+        return true;
     }
 
     private EstablishmentSummaryDTO toSummaryDTO(Establishment establishment) {
