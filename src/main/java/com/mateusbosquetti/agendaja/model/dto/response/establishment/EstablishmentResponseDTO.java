@@ -9,6 +9,7 @@ import java.util.List;
 public record EstablishmentResponseDTO(
         Long id,
         String name,
+        String description,
         String cnpj,
         Address address,
         String logoUrl,

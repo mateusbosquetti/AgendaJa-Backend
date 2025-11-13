@@ -1,6 +1,5 @@
 package com.mateusbosquetti.agendaja.service;
 
-import com.mateusbosquetti.agendaja.mapper.UserEstablishmentMapper;
 import com.mateusbosquetti.agendaja.model.compositekey.UserEstablishmentId;
 import com.mateusbosquetti.agendaja.model.dto.request.UserEstablishmentRequestDTO;
 import com.mateusbosquetti.agendaja.model.dto.response.userEstablishment.UserEstablishmentResponseDTO;
@@ -50,17 +49,17 @@ public class UserEstablishmentService {
 
         userEstablishment = repository.save(userEstablishment);
 
-        return UserEstablishmentMapper.toDTO(userEstablishment);
+        return this.toDTO(userEstablishment);
     }
 
     public UserEstablishment getUserEstablishmentByUserEmailAndEstablishmentId(String userEmail, Long establishmentId) {
-                return repository.findById_EstablishmentIdAndUser_UserAuthentication_Email(establishmentId, userEmail)
+        return repository.findById_EstablishmentIdAndUser_UserAuthentication_Email(establishmentId, userEmail)
                 .orElseThrow(() -> new RuntimeException("UserEstablishment not found for establishmentId=" + establishmentId + ", userEmail=" + userEmail));
     }
 
     public UserEstablishment getUserEstablishmentByUserIdAndEstablishmentId(Long userId, Long establishmentId) {
-                return repository.findUserEstablishmentById_EstablishmentIdAndId_UserId(establishmentId, userId)
-                        .orElseThrow(() -> new RuntimeException("UserEstablishment not found for establishmentId=" + establishmentId + ", userId=" + userId));
+        return repository.findUserEstablishmentById_EstablishmentIdAndId_UserId(establishmentId, userId)
+                .orElseThrow(() -> new RuntimeException("UserEstablishment not found for establishmentId=" + establishmentId + ", userId=" + userId));
     }
 
     public void deleteUserAtEstablishment(Long establishmentId, Long userId, Authentication authentication) {
@@ -77,11 +76,23 @@ public class UserEstablishmentService {
 
     public List<UserEstablishmentResponseDTO> getUserEstablishmentsByUserId(Long id) {
         System.out.println(id);
-        return repository.findAllById_UserId(id).stream().map(UserEstablishmentMapper::toDTO).toList();
+        return repository.findAllById_UserId(id).stream().map(this::toDTO).toList();
     }
 
     public List<UserEstablishmentResponseDTO> getUserEstablishmentsByEstablishmentId(Long establishmentId) {
         System.out.println(establishmentId);
-        return repository.findAllById_EstablishmentId(establishmentId).stream().map(UserEstablishmentMapper::toDTO).toList();
+        return repository.findAllById_EstablishmentId(establishmentId).stream().map(this::toDTO).toList();
     }
+
+    private UserEstablishmentResponseDTO toDTO(
+            UserEstablishment userEstablishment
+    ) {
+        return new UserEstablishmentResponseDTO(
+                userEstablishment.getId().getEstablishmentId(),
+                userEstablishment.getUser().getId(),
+                userEstablishment.getUser().getName(),
+                userEstablishment.getFunctionRole()
+        );
+    }
+
 }

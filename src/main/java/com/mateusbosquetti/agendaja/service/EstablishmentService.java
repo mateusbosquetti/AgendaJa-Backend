@@ -135,6 +135,7 @@ public class EstablishmentService {
         return new EstablishmentSummaryDTO(
                 establishment.getId(),
                 establishment.getName(),
+                establishment.getDescription(),
                 establishment.getCnpj(),
                 establishment.getAddress(),
                 establishment.getLogo().getKey()
@@ -145,6 +146,7 @@ public class EstablishmentService {
         return new EstablishmentResponseDTO(
                 establishment.getId(),
                 establishment.getName(),
+                establishment.getDescription(),
                 establishment.getCnpj(),
                 establishment.getAddress(),
                 establishment.getLogo().getKey(),
@@ -162,6 +164,7 @@ public class EstablishmentService {
                         .map(userEstablishment -> new UserEstablishmentResponseDTO(
                                 establishment.getId(),
                                 userEstablishment.getUser().getId(),
+                                userEstablishment.getUser().getName(),
                                 userEstablishment.getFunctionRole()
                         ))
                         .toList()

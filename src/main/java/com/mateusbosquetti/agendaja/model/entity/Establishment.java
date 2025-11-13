@@ -25,6 +25,10 @@ public class Establishment extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(length = 500)
+    private String description;
+
     @Column(nullable = false, unique = true, length = 14)
     private String cnpj;
 
