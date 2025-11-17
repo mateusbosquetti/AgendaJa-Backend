@@ -1,5 +1,6 @@
 package com.mateusbosquetti.agendaja.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -24,8 +25,16 @@ public class Establishment extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(length = 500)
+    private String description;
+
     @Column(nullable = false, unique = true, length = 14)
     private String cnpj;
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_establishment_logo"))
+    private File logo;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "address_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_user_address"))
@@ -35,5 +44,13 @@ public class Establishment extends BaseEntity {
     private List<ServiceEntity> serviceEntities;
     @OneToMany(mappedBy = "establishment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserEstablishment> usersRelated;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.logo == null) {
+            this.logo = new File();
+            this.logo.setId(2L);
+        }
+    }
 
 }

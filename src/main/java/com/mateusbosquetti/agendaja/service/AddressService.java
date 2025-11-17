@@ -25,7 +25,7 @@ public class AddressService {
     private final AddressRepository repository;
 
     public Address createAddress(AddressRequestDTO requestDTO) {
-        Address savedAddress = AddressMapper.toEntity(requestDTO);
+        Address savedAddress = toEntity(requestDTO);
         return repository.save(savedAddress);
     }
 
@@ -54,6 +54,21 @@ public class AddressService {
     public Address getAddressById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Address not found: id=" + id));
+    }
+
+    private Address toEntity(
+            AddressRequestDTO requestDTO
+    ) {
+        return Address.builder()
+                .number(requestDTO.number())
+                .street(requestDTO.street())
+                .city(requestDTO.city())
+                .stateProvince(requestDTO.stateProvince())
+                .countryCode(requestDTO.countryCode())
+                .postalCode(requestDTO.postalCode())
+                .latitude(requestDTO.latitude())
+                .longitude(requestDTO.longitude())
+                .build();
     }
 
 }

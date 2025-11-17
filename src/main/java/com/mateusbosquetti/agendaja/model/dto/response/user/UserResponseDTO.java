@@ -7,6 +7,7 @@ public record UserResponseDTO(
         String name,
         String phone,
         String cpf,
-        ThemeEnum theme
+        ThemeEnum theme,
+        String photoKey
 ) {
 }
