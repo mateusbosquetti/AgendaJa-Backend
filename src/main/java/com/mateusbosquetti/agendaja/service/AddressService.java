@@ -1,22 +1,15 @@
 package com.mateusbosquetti.agendaja.service;
 
-import com.mateusbosquetti.agendaja.mapper.AddressMapper;
-import com.mateusbosquetti.agendaja.mapper.EstablishmentMapper;
 import com.mateusbosquetti.agendaja.model.dto.request.AddressRequestDTO;
 import com.mateusbosquetti.agendaja.model.entity.Address;
-import com.mateusbosquetti.agendaja.model.entity.Establishment;
 import com.mateusbosquetti.agendaja.repository.AddressRepository;
 import com.mateusbosquetti.agendaja.specification.AddressSpecification;
-import com.mateusbosquetti.agendaja.specification.EstablishmentSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
